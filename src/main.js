@@ -1,6 +1,6 @@
 import { getCurrentWeather } from "./api";
 
-const detailViewCity = document.querySelector(".detail-view__city");
+const detailViewCity = document.querySelector(".detail-view__location");
 
 const detailViewTemp = document.querySelector(".detail-view__temperature_c");
 
