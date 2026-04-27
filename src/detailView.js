@@ -17,8 +17,8 @@ function renderDetailView(weatherData) {
     location.name,
     formatTemperature(current.temp_c),
     current.condition.text,
-    formatTemperature(currentDay.day.maxTemp),
-    formatTemperature(currentDay.day.minTemp),
+    formatTemperature(currentDay.day.maxtemp_c),
+    formatTemperature(currentDay.day.mintemp_c),
   );
 }
 
