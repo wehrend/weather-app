@@ -1,5 +1,6 @@
 import { rootElement } from "./main";
 import { getForecastWeather } from "./api";
+import { formatTemperature } from "./utils";
 
 export async function loadDetailView() {
   //loading screen
@@ -14,10 +15,10 @@ function renderDetailView(weatherData) {
   const currentDay = forecast.forecastday[0];
   rootElement.innerHTML = getHeaderHtml(
     location.name,
-    current.temp_c,
+    formatTemperature(current.temp_c),
     current.condition.text,
-    currentDay.day.maxTemp,
-    currentDay.day.minTemp,
+    formatTemperature(currentDay.day.maxTemp),
+    formatTemperature(currentDay.day.minTemp),
   );
 }
 
