@@ -1,5 +1,6 @@
 @use "mixins" as *;
 @use "detailView" as *;
+@use "variables" as *;
 
 @import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Rubik+Scribble&display=swap");
 $background-color: #333;
@@ -11,23 +12,25 @@ $background-color: #333;
 
 body {
   @include largeScreens {
-    background-color: $background-color;
     display: flex;
     align-items: center;
     justify-content: center;
+    background-color: lighten($background, 10);
   }
 }
 
 #app {
+  background-color: linear-gradient(0deg, $elevation2 0%, $background 50%);
+  color: $text-color;
   padding: 1rem;
-  border: 1px solid #fff;
+  border: 1px solid $text-color;
   font-family: "Inter" sans-serif;
 
   @include largeScreens {
     width: 400px;
     height: 900px;
     overflow: auto;
-    border-radius: 6px;
+    border-radius: $border-radius;
     box-shadow: 1px 1px 5px black;
     min-height: unset;
   }
