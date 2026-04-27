@@ -1,6 +1,7 @@
 @use "mixins" as *;
 @use "detailView" as *;
 @use "variables" as *;
+@use "loading" as *;
 
 @import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Rubik+Scribble&display=swap");
 $background-color: #333;
@@ -28,7 +29,7 @@ body {
 
   @include largeScreens {
     width: 400px;
-    height: 900px;
+    height: $max-height-desktop;
     overflow: auto;
     border-radius: $border-radius;
     box-shadow: 1px 1px 5px black;
