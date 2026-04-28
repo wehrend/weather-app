@@ -10,11 +10,56 @@
   <body>
     <div id="app">
       <div class="detail-view">
-        <h2 class="detail-view__city"></h2>
-        <h1 class="detail-view__temperature_c"></h1>
-        <p class="detail-view__condition"></p>
-        <span class="detail-view__highest"></span>
-        <span class="detail-view__lowest"></span>
+        <div class="detail-view__card">
+          <p class="detail-view__forecastedCondition">Mild sonnig</p>
+          <hr />
+          <div class="detail-view__caroussel">
+            <div class="detail-view__caroussel__hourly">
+              <div class="detail-view__hour">jetzt</div>
+              <img
+                src="https://cdn.weatherapi.com/weather/128x128/day/116.png"
+                class="detail-view__icon"
+              />
+              <div class="detail-view__forecasted_temperature">25°C</div>
+            </div>
+
+            <div class="detail-view__caroussel__hourly">
+              <div class="detail-view__hour">19:00</div>
+              <img
+                src="https://cdn.weatherapi.com/weather/128x128/day/116.png"
+                class="detail-view__icon"
+              />
+              <div class="detail-view__forecasted_temperature">25°C</div>
+            </div>
+
+            <div class="detail-view__caroussel__hourly">
+              <div class="detail-view__hour">20:00</div>
+              <img
+                src="https://cdn.weatherapi.com/weather/128x128/day/116.png"
+                class="detail-view__icon"
+              />
+              <div class="detail-view__forecasted_temperature">25°C</div>
+            </div>
+
+            <div class="detail-view__caroussel__hourly">
+              <div class="detail-view__hour">21:00</div>
+              <img
+                src="https://cdn.weatherapi.com/weather/128x128/day/116.png"
+                class="detail-view__icon"
+              />
+              <div class="detail-view__forecasted_temperature">25°C</div>
+            </div>
+
+            <div class="detail-view__caroussel__hourly">
+              <div class="detail-view__hour">21:00</div>
+              <img
+                src="https://cdn.weatherapi.com/weather/128x128/day/116.png"
+                class="detail-view__icon"
+              />
+              <div class="detail-view__forecasted_temperature">25°C</div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
     <script type="module" src="/src/main.js"></script>

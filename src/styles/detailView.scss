@@ -20,4 +20,45 @@
   &__condition {
     margin-bottom: 0.25rem;
   }
+
+  &__caroussel {
+    display: flex; // Aligns children in a row
+    flex-direction: row; // Default, but good for clarity
+    gap: 1.5rem; // Adds spacing between the items
+    overflow-x: auto; // Allows horizontal scrolling if items overflow
+    padding-bottom: 0.5rem; // Space for a scrollbar if needed
+
+    // Optional: Hide scrollbar for a cleaner look
+    &::-webkit-scrollbar {
+      display: none;
+    }
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+
+    // Individual item styling
+    & > div {
+      display: flex;
+      flex-direction: column; // Stack time, icon, and temp vertically
+      align-items: center; // Center them horizontally within the column
+      min-width: 60px; // Ensures items don't squash
+      flex-shrink: 0; // Prevents items from shrinking
+    }
+  }
+  // Die Card innerhalb der Box
+  &__card {
+    margin-top: 1.5rem;
+    background: rgba(
+      0,
+      0,
+      0,
+      0.2
+    ); // Dunkelt die Card innerhalb der Box leicht ab
+    padding: 1rem;
+    border-radius: 12px;
+    width: 100%; // Nimmt die volle Breite der Box ein (minus Padding)
+
+    &__forecasted_condition {
+      text-align: center;
+    }
+  }
 }
