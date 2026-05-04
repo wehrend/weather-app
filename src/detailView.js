@@ -13,13 +13,14 @@ export async function loadDetailView(cityName) {
 function renderDetailView(weatherData) {
   const { location, current, forecast } = weatherData;
   const currentDay = forecast.forecastday[0];
-  rootElement.innerHTML = getHeaderHtml(
-    location.name,
-    formatTemperature(current.temp_c),
-    current.condition.text,
-    formatTemperature(currentDay.day.maxtemp_c),
-    formatTemperature(currentDay.day.mintemp_c),
-  );
+  rootElement.innerHTML =
+    getHeaderHtml(
+      location.name,
+      formatTemperature(current.temp_c),
+      current.condition.text,
+      formatTemperature(currentDay.day.maxtemp_c),
+      formatTemperature(currentDay.day.mintemp_c),
+    ) + getTodayForecastHtml();
 }
 
 function getHeaderHtml(location, currentTemp, condtion, maxTemp, minTemp) {
@@ -34,4 +35,22 @@ function getHeaderHtml(location, currentTemp, condtion, maxTemp, minTemp) {
         <span class="detail-view__lowest">T:${minTemp}°</span>
         </div>
     </div>`;
+}
+
+function getTodayForecastHtml() {
+  return `
+          <div class="detail-view__card">
+          <p class="detail-view__forecastedCondition">Mild sonnig</p>
+          <div class="detail-view__caroussel">
+            <div class="detail-view__caroussel__hourly">
+              <div class="detail-view__hour">jetzt</div>
+              <img
+                src="https://cdn.weatherapi.com/weather/128x128/day/116.png"
+                class="detail-view__icon"
+              />
+              <div class="detail-view__forecasted_temperature">25°C</div>
+            </div>
+        </div>
+      </div>
+  `;
 }
