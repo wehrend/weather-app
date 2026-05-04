@@ -1,6 +1,6 @@
 import { rootElement } from "./main";
 import { getForecastWeather } from "./api";
-import { formatTemperature } from "./utils";
+import { formatHourlyTime, formatTemperature } from "./utils";
 import { renderLoadingScreen } from "./loading";
 
 export async function loadDetailView(cityName) {
@@ -20,7 +20,12 @@ function renderDetailView(weatherData) {
       current.condition.text,
       formatTemperature(currentDay.day.maxtemp_c),
       formatTemperature(currentDay.day.mintemp_c),
-    ) + getTodayForecastHtml();
+    ) +
+    getTodayForecastHtml(
+      currentDay.day.condition.text,
+      currentDay.day.maxwind_kph,
+      currentDay.hour,
+    );
 }
 
 function getHeaderHtml(location, currentTemp, condtion, maxTemp, minTemp) {
@@ -37,20 +42,27 @@ function getHeaderHtml(location, currentTemp, condtion, maxTemp, minTemp) {
     </div>`;
 }
 
-function getTodayForecastHtml() {
-  return `
-          <div class="detail-view__card">
-          <p class="detail-view__forecastedCondition">Mild sonnig</p>
-          <div class="detail-view__caroussel">
+function getTodayForecastHtml(condition, maxWind, forecastHours) {
+  const hourlyForecastElements = forecastHours.map(
+    (hour, index) => `
             <div class="detail-view__caroussel__hourly">
-              <div class="detail-view__hour">jetzt</div>
+              <div class="detail-view__hour">${index === 0 ? "Jetzt" : formatHourlyTime(hour.time) + "Uhr"}</div>
               <img
-                src="https://cdn.weatherapi.com/weather/128x128/day/116.png"
+                src="https:${hour.condition.icon}"
                 class="detail-view__icon"
               />
-              <div class="detail-view__forecasted_temperature">25°C</div>
+              <div class="detail-view__forecasted_temperature">${formatTemperature(hour.temp_c)}°C</div>
             </div>
-        </div>
+  `,
+  );
+
+  const hourlyForecstHtml = hourlyForecastElements.join("");
+  return `
+          <div class="detail-view__card">
+          <p class="detail-view__forecastedCondition">${condition}. Wind bis zu ${maxWind} km/h.</p>
+          <div class="detail-view__caroussel">
+          ${hourlyForecstHtml}
+          </div
       </div>
   `;
 }
