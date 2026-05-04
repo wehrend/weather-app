@@ -23,6 +23,7 @@ function renderDetailView(weatherData) {
 }
 
 function getHeaderHtml(location, currentTemp, condtion, maxTemp, minTemp) {
+  console.log("location: " + location + " temperature " + currentTemp);
   return `
     <div class="detail-view">
         <h2 class="detail-view__location">${location}</h2>

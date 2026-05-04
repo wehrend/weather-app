@@ -1,3 +1,5 @@
+@use "mixins" as *;
+
 .detail-view {
   margin-top: 2rem;
   color: white;
@@ -34,31 +36,18 @@
     }
     -ms-overflow-style: none;
     scrollbar-width: none;
+  }
 
-    // Individual item styling
-    & > div {
-      display: flex;
-      flex-direction: column; // Stack time, icon, and temp vertically
-      align-items: center; // Center them horizontally within the column
-      min-width: 60px; // Ensures items don't squash
-      flex-shrink: 0; // Prevents items from shrinking
-    }
+  &__icon {
+    width: 4rem;
   }
   // Die Card innerhalb der Box
   &__card {
-    margin-top: 1.5rem;
-    background: rgba(
-      0,
-      0,
-      0,
-      0.2
-    ); // Dunkelt die Card innerhalb der Box leicht ab
-    padding: 1rem;
-    border-radius: 12px;
-    width: 100%; // Nimmt die volle Breite der Box ein (minus Padding)
+    margin-top: 2rem;
+    @include card();
 
     &__forecasted_condition {
-      text-align: center;
+      @include cardHeader();
     }
   }
 }
