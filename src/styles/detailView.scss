@@ -29,7 +29,7 @@
     gap: 1.5rem; // Adds spacing between the items
     overflow-x: auto; // Allows horizontal scrolling if items overflow
     padding-bottom: 0.5rem; // Space for a scrollbar if needed
-
+    width: 100%;
     // Optional: Hide scrollbar for a cleaner look
     &::-webkit-scrollbar {
       display: none;
