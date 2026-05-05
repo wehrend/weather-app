@@ -1,6 +1,10 @@
 import { rootElement } from "./main";
 import { getForecastWeather } from "./api";
-import { formatHourlyTime, formatTemperature } from "./utils";
+import {
+  formatHourlyTime,
+  formatTemperature,
+  get24HoursForecastFromNow,
+} from "./utils";
 import { renderLoadingScreen } from "./loading";
 
 export async function loadDetailView(cityName) {
@@ -24,7 +28,8 @@ function renderDetailView(weatherData) {
     getTodayForecastHtml(
       currentDay.day.condition.text,
       currentDay.day.maxwind_kph,
-      currentDay.hour,
+      forecast.forecastday,
+      current.last_updated_epoch,
     );
 }
 
@@ -42,8 +47,16 @@ function getHeaderHtml(location, currentTemp, condtion, maxTemp, minTemp) {
     </div>`;
 }
 
-function getTodayForecastHtml(condition, maxWind, forecastHours) {
-  const hourlyForecastElements = forecastHours.map(
+function getTodayForecastHtml(
+  condition,
+  maxWind,
+  forecastDays,
+  lastUpdatedEpoch,
+) {
+  const hourlyForecastElements = get24HoursForecastFromNow(
+    forecastDays,
+    lastUpdatedEpoch,
+  ).map(
     (hour, index) => `
             <div class="detail-view__caroussel__hourly">
               <div class="detail-view__hour">${index === 0 ? "Jetzt" : formatHourlyTime(hour.time) + "Uhr"}</div>
