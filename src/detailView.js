@@ -30,7 +30,8 @@ function renderDetailView(weatherData) {
       currentDay.day.maxwind_kph,
       forecast.forecastday,
       current.last_updated_epoch,
-    );
+    ) +
+    get3daysForecastHtml("Mi", "test", "22", "15", "13.6");
 }
 
 function getHeaderHtml(location, currentTemp, condtion, maxTemp, minTemp) {
@@ -78,4 +79,24 @@ function getTodayForecastHtml(
           </div
       </div>
   `;
+}
+
+function get3daysForecastHtml(weekday, icon, min_temp, max_temp, max_wind) {
+  return `
+        <div class="detail-view__card">
+          <p class="detail-view__3daysForecast__title">
+            Vorhersage für die nächsten 3 Tage:
+          </p>
+            <div class="detail-view__3daysForecast">
+              <div class="detail-view__3daysForecast__p">${weekday}</div>
+              <img
+                src="https:${icon}"
+                class="detail-view__3daysForecast__icon"
+              />
+              <div class="detail-view__3daysForecast__highest">H:${max_temp}°C</div>
+              <div class="detail-view__3daysForecast__lowest">T:${min_temp}°C</div>
+              <div class="detail-view__3daysForecast__wind">Wind:${max_wind}km/h</div>
+            </div>
+        </div>
+`;
 }

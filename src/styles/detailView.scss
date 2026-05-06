@@ -1,4 +1,5 @@
 @use "mixins" as *;
+@use "variables" as *;
 
 .detail-view {
   margin-top: 2rem;
@@ -49,10 +50,28 @@
     &__forecasted_condition {
       @include cardHeader();
     }
+    &__3daysForecast {
+      @include card();
+      margin-top: 2rem;
+
+      &__title {
+        @include cardHeader();
+      }
+    }
+  }
+
+  &__3daysForecasts {
+    gap: $card-header-gap;
+    padding: 0.5rem 0;
   }
 
   &__3daysForecast {
     display: flex;
-    flex-direction: column;
+    align-items: center;
+    gap: $card-header-gap;
+
+    &__icon {
+      width: 4rem;
+    }
   }
 }
