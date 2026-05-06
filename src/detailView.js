@@ -4,6 +4,7 @@ import {
   formatHourlyTime,
   formatTemperature,
   get24HoursForecastFromNow,
+  getDayOfWeek,
 } from "./utils";
 import { renderLoadingScreen } from "./loading";
 
@@ -31,7 +32,7 @@ function renderDetailView(weatherData) {
       forecast.forecastday,
       current.last_updated_epoch,
     ) +
-    get3daysForecastHtml("Mi", "test", "22", "15", "13.6");
+    get3daysForecastHtml(forecast.forecastday);
 }
 
 function getHeaderHtml(location, currentTemp, condtion, maxTemp, minTemp) {
@@ -81,22 +82,31 @@ function getTodayForecastHtml(
   `;
 }
 
-function get3daysForecastHtml(weekday, icon, min_temp, max_temp, max_wind) {
+function get3daysForecastHtml(forecast) {
+  const forecastElements = forecast.map(
+    (forecastDay) => ` 
+        <div class="detail-view__3daysForecast">
+          <div class="detail-view__3daysForecast__p">${getDayOfWeek(forecastDay.date)}</div>
+          <img
+            src="https:${forecastDay.day.condition.icon}"
+            class="detail-view__3daysForecast__icon"
+          />
+          <div class="detail-view__3daysForecast__highest">H:${formatTemperature(forecastDay.day.maxtemp_c)}°C</div>
+          <div class="detail-view__3daysForecast__lowest">T:${formatTemperature(forecastDay.day.mintemp_c)}°C</div>
+          <div class="detail-view__3daysForecast__wind">Wind:${forecastDay.day.maxwind_kph}km/h</div>
+        </div>
+  `,
+  );
+
+  const forecastHtml = forecastElements.join("");
+
   return `
         <div class="detail-view__card">
           <p class="detail-view__3daysForecast__title">
             Vorhersage für die nächsten 3 Tage:
           </p>
-            <div class="detail-view__3daysForecast">
-              <div class="detail-view__3daysForecast__p">${weekday}</div>
-              <img
-                src="https:${icon}"
-                class="detail-view__3daysForecast__icon"
-              />
-              <div class="detail-view__3daysForecast__highest">H:${max_temp}°C</div>
-              <div class="detail-view__3daysForecast__lowest">T:${min_temp}°C</div>
-              <div class="detail-view__3daysForecast__wind">Wind:${max_wind}km/h</div>
-            </div>
+            <div class="detail-view__3daysForecasts">
+            ${forecastHtml}
         </div>
 `;
 }

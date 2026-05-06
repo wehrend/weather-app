@@ -33,3 +33,11 @@ export function get24HoursForecastFromNow(forecast, lastUpdatedEpoch) {
 
   return newForecast;
 }
+
+export function getDayOfWeek(date) {
+  const dateObj = new Date(date);
+
+  const days = ["So", "Mo", "Di", "Mi", "Do", "Fr", "Sa"];
+
+  return days[dateObj.getDay()];
+}
