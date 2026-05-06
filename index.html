@@ -10,53 +10,54 @@
   <body>
     <div id="app">
       <div class="detail-view">
+        <!-- Card 2: 3-Day Forecast -->
         <div class="detail-view__card">
-          <p class="detail-view__forecastedCondition">Mild sonnig</p>
-          <hr />
-          <div class="detail-view__caroussel">
-            <div class="detail-view__caroussel__hourly">
-              <div class="detail-view__hour">jetzt</div>
+          <p class="detail-view__title">Vorhersage für die nächsten 3 Tage:</p>
+          <div class="detail-view__3daysForecast">
+            <div class="detail-view__3daysForecast__today">
+              <div class="detail-view__3daysForecast_today_p">Heute</div>
               <img
                 src="https://cdn.weatherapi.com/weather/128x128/day/116.png"
-                class="detail-view__icon"
+                class="detail-view__daysForecast__today__icon"
               />
-              <div class="detail-view__forecasted_temperature">25°C</div>
+              <div class="detail-view__daysForecast__tody__highest">H:25°C</div>
+              <div class="detail-view__daysForecast__today__lowest">T:15°C</div>
+              <div class="detail-view__daysForecast__today__wind">
+                Wind:15.5km/h
+              </div>
+            </div>
+            <div class="detail-view__3daysForecast__tomorrow">
+              <div class="detail-view__3daysForecast__tommorow_p">Di</div>
+              <img
+                src="https://cdn.weatherapi.com/weather/128x128/day/116.png"
+                class="detail-view__daysForecast__tommorow__icon"
+              />
+              <div class="detail-view__daysForecast__tommorow__highest">
+                H:25°C
+              </div>
+              <div class="detail-view__daysForecast__tommorow__lowest">
+                T:15°C
+              </div>
+              <div class="detail-view__daysForecast__tommorow__wind">
+                Wind:15.5km/h
+              </div>
             </div>
 
-            <div class="detail-view__caroussel__hourly">
-              <div class="detail-view__hour">19:00</div>
+            <div class="detail-view__3daysForecast__overmorrow">
+              <div class="detail-view__3daysForecast__overmorow_p">MI</div>
               <img
                 src="https://cdn.weatherapi.com/weather/128x128/day/116.png"
-                class="detail-view__icon"
+                class="detail-view__daysForecast__overmorow__icon"
               />
-              <div class="detail-view__forecasted_temperature">25°C</div>
-            </div>
-
-            <div class="detail-view__caroussel__hourly">
-              <div class="detail-view__hour">20:00</div>
-              <img
-                src="https://cdn.weatherapi.com/weather/128x128/day/116.png"
-                class="detail-view__icon"
-              />
-              <div class="detail-view__forecasted_temperature">25°C</div>
-            </div>
-
-            <div class="detail-view__caroussel__hourly">
-              <div class="detail-view__hour">21:00</div>
-              <img
-                src="https://cdn.weatherapi.com/weather/128x128/day/116.png"
-                class="detail-view__icon"
-              />
-              <div class="detail-view__forecasted_temperature">25°C</div>
-            </div>
-
-            <div class="detail-view__caroussel__hourly">
-              <div class="detail-view__hour">21:00</div>
-              <img
-                src="https://cdn.weatherapi.com/weather/128x128/day/116.png"
-                class="detail-view__icon"
-              />
-              <div class="detail-view__forecasted_temperature">25°C</div>
+              <div class="detail-view__daysForecast__overmorow__highest">
+                H:25°C
+              </div>
+              <div class="detail-view__daysForecast__overmorow__lowest">
+                T:15°C
+              </div>
+              <div class="detail-view__daysForecast__overmorow__wind">
+                Wind:15.5km/h
+              </div>
             </div>
           </div>
         </div>
