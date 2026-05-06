@@ -84,9 +84,9 @@ function getTodayForecastHtml(
 
 function get3daysForecastHtml(forecast) {
   const forecastElements = forecast.map(
-    (forecastDay) => ` 
+    (forecastDay, index) => ` 
         <div class="detail-view__3daysForecast">
-          <div class="detail-view__3daysForecast__p">${getDayOfWeek(forecastDay.date)}</div>
+          <div class="detail-view__3daysForecast__p">${index === 0 ? "Heute" : getDayOfWeek(forecastDay.date)}</div>
           <img
             src="https:${forecastDay.day.condition.icon}"
             class="detail-view__3daysForecast__icon"
