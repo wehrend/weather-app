@@ -32,7 +32,15 @@ function renderDetailView(weatherData) {
       forecast.forecastday,
       current.last_updated_epoch,
     ) +
-    get3daysForecastHtml(forecast.forecastday);
+    get3daysForecastHtml(forecast.forecastday) +
+    getStatsHtml(
+      current.humidity,
+      current.feelslike_c,
+      currentDay.astro.sunrise,
+      currentDay.astro.sunset,
+      current.precip_mm,
+      current.uv,
+    );
 }
 
 function getHeaderHtml(location, currentTemp, condtion, maxTemp, minTemp) {
@@ -58,8 +66,10 @@ function getTodayForecastHtml(
   const hourlyForecastElements = get24HoursForecastFromNow(
     forecastDays,
     lastUpdatedEpoch,
-  ).map(
-    (hour, index) => `
+  )
+    .filter((el) => el !== undefined)
+    .map(
+      (hour, index) => `
             <div class="detail-view__caroussel__hourly">
               <div class="detail-view__hour">${index === 0 ? "Jetzt" : formatHourlyTime(hour.time) + "Uhr"}</div>
               <img
@@ -69,7 +79,7 @@ function getTodayForecastHtml(
               <div class="detail-view__forecasted_temperature">${formatTemperature(hour.temp_c)}°C</div>
             </div>
   `,
-  );
+    );
 
   const hourlyForecstHtml = hourlyForecastElements.join("");
   return `
@@ -109,4 +119,36 @@ function get3daysForecastHtml(forecast) {
             ${forecastHtml}
         </div>
 `;
+}
+
+function getStatsHtml(humidity, feelsLike, sunrise, sunset, precip, uvIndex) {
+  return `<div class="mini-stats">
+       <div class="mini-stat">
+          <div class="mini-stat__title">Feuchtigkeit</div>
+          <div class="mini-stat__value">${humidity}%</div>
+        </div>
+        <div class="mini-stat">
+          <div class="mini-stats__title">Gefühlt</div>
+          <div class="mini-stats__value">${feelsLike}</div>
+        </div>
+        <div class="mini-stat">
+          <div class="mini-stats__title">Sonnenaufgang</div>
+          <div class="mini-stats__value">${sunrise}</div>
+        </div>
+        <div class="mini-stat">
+          <div class="mini-stats__title">Sonnenuntergang</div>
+          <div class="mini-stats__value">${sunset}</div>
+        </div>
+        <div class="mini-stat">
+          <div class="mini-stats__title">Niederschlag</div>
+          <div class="mini-stats__value">${precip}mm</div>
+        </div>
+        <div class="mini-stat">
+          <div class="mini-stats__title">UV-Index</div>
+          <div class="mini-stats__value">${uvIndex}</div>
+        </div>
+    
+      </div>
+  
+  `;
 }
