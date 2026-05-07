@@ -5,6 +5,7 @@ import {
   formatTemperature,
   get24HoursForecastFromNow,
   getDayOfWeek,
+  formatToMilitaryTime,
 } from "./utils";
 import { renderLoadingScreen } from "./loading";
 
@@ -133,11 +134,11 @@ function getStatsHtml(humidity, feelsLike, sunrise, sunset, precip, uvIndex) {
         </div>
         <div class="mini-stat">
           <div class="mini-stats__title">Sonnenaufgang</div>
-          <div class="mini-stats__value">${sunrise}</div>
+          <div class="mini-stats__value">${formatToMilitaryTime(sunrise)}</div>
         </div>
         <div class="mini-stat">
           <div class="mini-stats__title">Sonnenuntergang</div>
-          <div class="mini-stats__value">${sunset}</div>
+          <div class="mini-stats__value">${formatToMilitaryTime(sunset)}</div>
         </div>
         <div class="mini-stat">
           <div class="mini-stats__title">Niederschlag</div>
