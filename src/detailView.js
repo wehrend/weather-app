@@ -8,6 +8,7 @@ import {
   formatToMilitaryTime,
 } from "./utils";
 import { renderLoadingScreen } from "./loading";
+import { getConditionImagePath } from "./conditions";
 
 export async function loadDetailView(cityName) {
   renderLoadingScreen("Lade Wetter für " + cityName + " ...");
@@ -19,6 +20,15 @@ export async function loadDetailView(cityName) {
 function renderDetailView(weatherData) {
   const { location, current, forecast } = weatherData;
   const currentDay = forecast.forecastday[0];
+
+  const conditionImage = getConditionImagePath(
+    current.condition.code,
+    current.is_day !== 1,
+  );
+  if (conditionImage) {
+    rootElement.style = `--detail-condition-image: url(${conditionImage})`;
+    rootElement.classList.add("show-background");
+  }
   rootElement.innerHTML =
     getHeaderHtml(
       location.name,
