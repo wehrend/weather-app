@@ -1,5 +1,12 @@
 import { loadDetailView } from "./detailView";
+import { renderLoadingScreen } from "./loading";
 import { rootElement } from "./main";
+
+export function loadMainMenu() {
+  rootElement.classList.remove("show-background");
+  renderLoadingScreen("Load overview...");
+  renderMainMenu();
+}
 
 export function renderMainMenu() {
   rootElement.innerHTML = `

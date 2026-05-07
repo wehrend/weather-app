@@ -1,8 +1,6 @@
-import { loadDetailView } from "./detailView";
-import { renderMainMenu } from "./mainMenu";
+import { loadMainMenu } from "./mainMenu";
 
 export const rootElement = document.getElementById("app");
 
-// await loadDetailView("Berlin");
-
-renderMainMenu();
+// await loadDetailView("Berlin")
+loadMainMenu();
