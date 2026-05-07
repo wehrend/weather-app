@@ -42,7 +42,7 @@ export function getDayOfWeek(date) {
   return days[dateObj.getDay()];
 }
 
-export function formatToMilitarxTime(time) {
+export function formatToMilitaryTime(time) {
   const isAM = time.includes("AM");
 
   const timeWithoutSuffix = time.split(" ")[0];
@@ -53,7 +53,7 @@ export function formatToMilitarxTime(time) {
 
   const [hours, minutes] = timeWithoutSuffix.split(":");
 
-  const newHour = Number(hour) + 12;
+  const newHour = Number(hours) + 12;
 
   return newHour + ":" + minutes;
 }
