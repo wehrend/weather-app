@@ -5,7 +5,8 @@
   display: flex;
   justify-content: space-between;
 
-  &__back {
+  &__back,
+  &__favorite {
     width: 2.5rem;
     cursor: pointer;
   }

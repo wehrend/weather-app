@@ -1,4 +1,4 @@
-import { getForecastWeather } from "./api";
+import { getFavoriteCities, getForecastWeather } from "./api";
 import { loadDetailView } from "./detailView";
 import { renderLoadingScreen } from "./loading";
 import { rootElement } from "./main";
@@ -38,7 +38,11 @@ function getMenuHeaderHtml() {
 }
 
 async function getCityListHtml() {
-  const favoriteCities = ["Oslo", "Rio de Janeiro", "Helsinki"];
+  const favoriteCities = getFavoriteCities();
+
+  if (!favoriteCities || favoriteCities.length < 1) {
+    return "No favorites yet stored!";
+  }
 
   const favoriteCitiesElements = [];
 
