@@ -9,12 +9,13 @@ import {
 } from "./utils";
 import { renderLoadingScreen } from "./loading";
 import { getConditionImagePath } from "./conditions";
+import { loadMainMenu } from "./mainMenu";
 
 export async function loadDetailView(cityName) {
   renderLoadingScreen("Lade Wetter für " + cityName + " ...");
   const weatherData = await getForecastWeather(cityName);
   renderDetailView(weatherData);
-  // add event listener
+  registerEventListeners();
 }
 
 function renderDetailView(weatherData) {
@@ -30,6 +31,7 @@ function renderDetailView(weatherData) {
     rootElement.classList.add("show-background");
   }
   rootElement.innerHTML =
+    getActionBarHtml() +
     getHeaderHtml(
       location.name,
       formatTemperature(current.temp_c),
@@ -52,6 +54,21 @@ function renderDetailView(weatherData) {
       current.precip_mm,
       current.uv,
     );
+}
+
+function getActionBarHtml() {
+  const backIcon = `
+  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+    <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5" />
+  </svg>
+`;
+
+  return `
+    <div class="action-bar">
+      <div class="action-bar__back">${backIcon}
+      </div>
+    </div>
+  `;
 }
 
 function getHeaderHtml(location, currentTemp, condtion, maxTemp, minTemp) {
@@ -162,4 +179,12 @@ function getStatsHtml(humidity, feelsLike, sunrise, sunset, precip, uvIndex) {
       </div>
   
   `;
+}
+
+function registerEventListeners() {
+  const backButton = document.querySelector(".action-bar__back");
+
+  backButton.addEventListener("click", () => {
+    loadMainMenu();
+  });
 }
