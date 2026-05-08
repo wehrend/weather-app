@@ -1,4 +1,8 @@
-import { getFavoriteCities, getForecastWeather } from "./api";
+import {
+  getFavoriteCities,
+  getForecastWeather,
+  removeCityFromFavorites,
+} from "./api";
 import { loadDetailView } from "./detailView";
 import { renderLoadingScreen } from "./loading";
 import { rootElement } from "./main";
@@ -95,8 +99,12 @@ function registerEventListeners() {
   const editButton = document.querySelector(".main-menu__edit");
   const deleteButtons = document.querySelectorAll(".city-wrapper__delete");
 
-  console.log(editButton);
-  console.log(deleteButtons);
+  deleteButtons.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      removeCityFromFavorites(btn.getAttribute("data-city-name"));
+      btn.parentElement.remove();
+    });
+  });
 
   editButton.addEventListener("click", () => {
     const EDIT_ATTRIBUTE = "data-edit-mode";

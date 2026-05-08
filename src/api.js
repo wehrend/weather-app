@@ -30,3 +30,10 @@ export function saveCityAsFavorite(city) {
 
   localStorage.setItem(FAVORITE_CITIES_KEY, JSON.stringify(favorites));
 }
+
+export function removeCityFromFavorites(city) {
+  const favorites = getFavoriteCities();
+
+  const filteredFavorites = favorites.filter((favorite) => favorite !== city);
+  localStorage.setItem(FAVORITE_CITIES_KEY, JSON.stringify(filteredFavorites));
+}
