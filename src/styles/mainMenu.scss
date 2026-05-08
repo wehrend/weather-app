@@ -27,7 +27,9 @@
 
   &__search-bar {
     width: 100%;
+    position: relative;
   }
+
   &__search-input {
     box-sizing: border-box;
     width: 100%;
@@ -35,6 +37,32 @@
     font-size: 1rem;
     border-radius: $border-radius;
     border: none;
+  }
+
+  &__search-results {
+    position: absolute;
+    z-index: 2;
+    // iOS Hack
+    transform: translateZ(100px);
+    left: 0;
+    right: 0;
+    background-color: $elevation;
+    border-bottom-right-radius: $border-radius;
+    border-bottom-left-radius: $border-radius;
+
+    .search-result {
+      padding: 0.75 rem;
+      border-bottom: $border;
+      cursor: pointer;
+
+      &:last-child {
+        border: none;
+      }
+
+      &:hover {
+        background-color: $elevation2;
+      }
+    }
   }
 
   &__cities-list {
