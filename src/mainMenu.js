@@ -100,7 +100,7 @@ async function getCityListHtml() {
 function renderSearchResults(searchResults) {
   const searchResultsElements = searchResults.map(
     (result) => `
-      <div class="search-result">
+      <div class="search-result" data-city-name="${result.name}">
         <h3 class="search-result__name">${result.name}</h3>
         <p class="search-result__country">${result.country}</p>
       </div>
@@ -111,6 +111,17 @@ function renderSearchResults(searchResults) {
 
   const searchResultsDiv = document.querySelector(".main-menu__search-results");
   searchResultsDiv.innerHTML = searchResultsHtml;
+}
+
+function registerSearchResultsEventListeners() {
+  const searchResults = document.querySelectorAll(".search-result");
+
+  searchResults.forEach((searchResult) => {
+    searchResult.addEventListener("click", () => {
+      const cityName = searchResult.getAttribute("data-city-name");
+      loadDetailView(cityName);
+    });
+  });
 }
 
 function registerEventListeners() {
@@ -157,6 +168,7 @@ function registerEventListeners() {
     }
 
     renderSearchResults(searchResults);
+    registerSearchResultsEventListeners();
   });
 
   const cities = document.querySelectorAll(".city");
