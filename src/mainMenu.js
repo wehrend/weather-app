@@ -68,10 +68,11 @@ async function getCityListHtml() {
     );
     const cityHtml = `
         <div class="city-wrapper">
-        <div class="city-wrapper__delete" data-city-name="${city}">${deleteIcon}</div>
+        <div class="city-wrapper__delete" data-city-id="${city}">${deleteIcon}</div>
           <div class="city" 
           style="--condition-image: url(${conditionImage})" 
-          data-city-name="${city}">
+          data-city-name="${location.name}"
+          data-city-id="${city}">
             <div class="city__left-column">
               <h2 class="city__name">${location.name}</h2>
               <div class="city__country">${location.country}</div>
@@ -100,7 +101,8 @@ async function getCityListHtml() {
 function renderSearchResults(searchResults) {
   const searchResultsElements = searchResults.map(
     (result) => `
-      <div class="search-result" data-city-name="${result.name}">
+      <div class="search-result" data-city-name="${result.name}" 
+      data-city-id="${result.id}">
         <h3 class="search-result__name">${result.name}</h3>
         <p class="search-result__country">${result.country}</p>
       </div>
@@ -119,7 +121,8 @@ function registerSearchResultsEventListeners() {
   searchResults.forEach((searchResult) => {
     searchResult.addEventListener("click", () => {
       const cityName = searchResult.getAttribute("data-city-name");
-      loadDetailView(cityName);
+      const cityId = searchResult.getAttribute("data-city-id");
+      loadDetailView(cityName, cityId);
     });
   });
 }
@@ -130,7 +133,7 @@ function registerEventListeners() {
 
   deleteButtons.forEach((btn) => {
     btn.addEventListener("click", () => {
-      removeCityFromFavorites(btn.getAttribute("data-city-name"));
+      removeCityFromFavorites(btn.getAttribute("data-city-id"));
       btn.parentElement.remove();
     });
   });
@@ -176,8 +179,9 @@ function registerEventListeners() {
   cities.forEach((city) => {
     city.addEventListener("click", () => {
       const cityName = city.getAttribute("data-city-name");
+      const cityId = city.getAttribute("data-city-id");
 
-      loadDetailView(cityName);
+      loadDetailView(cityName, cityId);
     });
   });
 }

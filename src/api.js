@@ -7,7 +7,7 @@ export async function getForecastWeather(wheaterLocation, days = 3) {
     method: "GET",
     redirect: "follow",
   };
-  let requestString = `${API_ENDPOINT}/forecast.json?key=${key}&q=${wheaterLocation}&lang=de&days=${days}`;
+  let requestString = `${API_ENDPOINT}/forecast.json?key=${key}&q=id:${wheaterLocation}&lang=de&days=${days}`;
   console.log(requestString);
   const response = await fetch(requestString, requestOptions);
   const data = await response.json();

@@ -15,14 +15,14 @@ import { renderLoadingScreen } from "./loading";
 import { getConditionImagePath } from "./conditions";
 import { loadMainMenu } from "./mainMenu";
 
-export async function loadDetailView(cityName) {
+export async function loadDetailView(cityName, cityId) {
   renderLoadingScreen("Lade Wetter für " + cityName + " ...");
-  const weatherData = await getForecastWeather(cityName);
-  renderDetailView(weatherData, cityName);
-  registerEventListeners(cityName);
+  const weatherData = await getForecastWeather(cityId);
+  renderDetailView(weatherData, cityId);
+  registerEventListeners(cityId);
 }
 
-function renderDetailView(weatherData, cityName) {
+function renderDetailView(weatherData, cityId) {
   const { location, current, forecast } = weatherData;
   const currentDay = forecast.forecastday[0];
 
@@ -35,7 +35,7 @@ function renderDetailView(weatherData, cityName) {
     rootElement.classList.add("show-background");
   }
 
-  const isFavorite = getFavoriteCities().find((city) => city === cityName);
+  const isFavorite = getFavoriteCities().find((city) => city === cityId);
 
   rootElement.innerHTML =
     getActionBarHtml(!isFavorite) +
@@ -193,7 +193,7 @@ function getStatsHtml(humidity, feelsLike, sunrise, sunset, precip, uvIndex) {
   `;
 }
 
-function registerEventListeners(city) {
+function registerEventListeners(cityId) {
   const backButton = document.querySelector(".action-bar__back");
 
   backButton.addEventListener("click", () => {
@@ -203,7 +203,7 @@ function registerEventListeners(city) {
   const favoriteButton = document.querySelector(".action-bar__favorite");
 
   favoriteButton?.addEventListener("click", () => {
-    saveCityAsFavorite(city);
+    saveCityAsFavorite(cityId);
     favoriteButton.remove();
   });
 }
