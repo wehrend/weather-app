@@ -8,7 +8,7 @@ import { loadDetailView } from "./detailView";
 import { renderLoadingScreen } from "./loading";
 import { rootElement } from "./main";
 import { getConditionImagePath } from "./conditions";
-import { formatTemperature } from "./utils";
+import { formatTemperature, debounce } from "./utils";
 
 export async function loadMainMenu() {
   rootElement.classList.remove("show-background");
@@ -178,20 +178,23 @@ function registerEventListeners() {
 
   const searchBar = document.querySelector(".main-menu__search-input");
 
-  searchBar.addEventListener("input", async (e) => {
-    const q = e.target.value;
+  searchBar.addEventListener(
+    "input",
+    debounce(async (e) => {
+      const q = e.target.value;
 
-    let searchResults = [];
+      let searchResults = [];
 
-    if (q.length > 1) {
-      renderSearchResultsLoading();
-      searchResults = await searchLocation(q);
-      console.log(searchResults);
-    }
+      if (q.length > 1) {
+        renderSearchResultsLoading();
+        searchResults = await searchLocation(q);
+        console.log(searchResults);
+      }
 
-    renderSearchResults(searchResults);
-    registerSearchResultsEventListeners();
-  });
+      renderSearchResults(searchResults);
+      registerSearchResultsEventListeners();
+    }, 500),
+  );
 
   document.addEventListener("click", bodyClickHandler);
 
