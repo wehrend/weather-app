@@ -115,6 +115,11 @@ function renderSearchResults(searchResults) {
   searchResultsDiv.innerHTML = searchResultsHtml;
 }
 
+function renderSearchResultsLoading() {
+  const searchResultsDiv = document.querySelector(".main-menu__search-results");
+  searchResultsDiv.innerHTML = `<div class="search-result">Load suggestions...</div>`;
+}
+
 function registerSearchResultsEventListeners() {
   const searchResults = document.querySelectorAll(".search-result");
 
@@ -140,7 +145,7 @@ function registerEventListeners() {
 
   editButton.addEventListener("click", () => {
     const EDIT_ATTRIBUTE = "data-edit-mode";
-    console.log("change");
+
     if (!editButton.getAttribute(EDIT_ATTRIBUTE)) {
       editButton.setAttribute(EDIT_ATTRIBUTE, "true");
       editButton.textContent = "Finish";
@@ -166,6 +171,7 @@ function registerEventListeners() {
     let searchResults = [];
 
     if (q.length > 1) {
+      renderSearchResultsLoading();
       searchResults = await searchLocation(q);
       console.log(searchResults);
     }
